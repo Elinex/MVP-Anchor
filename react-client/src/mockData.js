@@ -10,7 +10,8 @@ const generateUser = (id) => ({
   level: faker.random.arrayElement(['beginner','intermediate','advanced']),
   preferCategory: faker.random.arrayElement(['bouldering','free solo','sport climbing','roped climbing', 'traditional climbing']),
   preferClimb: faker.random.arrayElement(['indoor','outdoor','anywhere']),
-  climbSince: faker.date.past()
+  climbSince: faker.date.past(),
+  status: faker.random.arrayElement(['liked','none'])
 })
 
 const num = 50;

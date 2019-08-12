@@ -1,16 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import users from './mockData.js';
 
-import users from './mockData.js'
+import List from './components/List.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: 'main'
+      activeView: 'main',
+      users: []
     }
     this.changeView = this.changeView.bind(this);
+    this.filterUsers = this.filterUsers.bind(this);
   }
 
   componentDidMount() {
@@ -25,6 +28,9 @@ class App extends React.Component {
     //     console.log('err', err);
     //   }
     // });
+    this.setState({
+      users: users
+    })
   }
 
   changeView(view){
@@ -33,17 +39,21 @@ class App extends React.Component {
     })
   }
 
+  filterUsers(status){
+    const users = this.state.users.filter(user => user.status === status);
+    return users;
+  }
+
   render () {
     const { activeView } = this.state;
-    console.log(users);
 
     return (
       <div>
         <h1>Anchor</h1>
         <button onClick={() => this.changeView('showClimbers')}>See climbers next you</button>
         <button onClick={() => this.changeView('showAnchors')}>Anchored climbers</button>
-        {activeView === 'showClimbers' && <h5>showClimbers</h5>}
-        {activeView === 'showAnchors' && <h5>showAnchors</h5>}
+        {activeView === 'showClimbers' && <List users={this.filterUsers('none')} />}
+        {activeView === 'showAnchors' && <List users={this.filterUsers('liked')} />}
       </div>
     )
   }
