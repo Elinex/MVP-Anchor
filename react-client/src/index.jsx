@@ -1,35 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-      items: []
+    this.state = {
+      activeView: 'main'
     }
+    this.changeView = this.changeView.bind(this);
   }
 
   componentDidMount() {
-    $.ajax({
-      url: '/items', 
-      success: (data) => {
-        this.setState({
-          items: data
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+    // $.ajax({
+    //   url: '/items',
+    //   success: (data) => {
+    //     this.setState({
+    //       items: data
+    //     })
+    //   },
+    //   error: (err) => {
+    //     console.log('err', err);
+    //   }
+    // });
+  }
+
+  changeView(view){
+    this.setState({
+      activeView: view
+    })
   }
 
   render () {
-    return (<div>
-      <h1>Item List</h1>
-      <List items={this.state.items}/>
-    </div>)
+    const { activeView } = this.state;
+    console.log(this.state)
+    return (
+      <div>
+        <h1>Anchor</h1>
+        <button onClick={() => this.changeView('showClimbers')}>See climbers next you</button>
+        <button onClick={() => this.changeView('showAnchors')}>Anchored climbers</button>
+        {activeView === 'showClimbers' && <h5>showClimbers</h5>}
+        {activeView === 'showAnchors' && <h5>showAnchors</h5>}
+      </div>
+    )
   }
 }
 
