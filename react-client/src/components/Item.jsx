@@ -1,5 +1,8 @@
 import React from 'react';
 import moment from 'moment';
+import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
+import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
+
 
 const styles = {
   mainDiv: {
@@ -42,6 +45,10 @@ const styles = {
   },
   climbSince: {
     flex: '1 100%'
+  },
+  iconDiv: {
+    display: 'flex',
+    justifyContent: 'space-around'
   }
 }
 
@@ -70,6 +77,10 @@ const Item = ({user}) => {
       </div>
       <div style={styles.climbSince}>
         <span>Climb since  {moment(user.climbSince, "YYYYMMDD").fromNow()}</span>
+      </div>
+      <div style={styles.iconDiv}>
+        <TiThumbsUp height={25} width={25}/>
+        <TiThumbsDown height={25} width={25}/>
       </div>
     </div>
   )
