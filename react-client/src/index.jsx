@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
+import users from './mockData.js'
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -33,7 +35,8 @@ class App extends React.Component {
 
   render () {
     const { activeView } = this.state;
-    console.log(this.state)
+    console.log(users);
+
     return (
       <div>
         <h1>Anchor</h1>
