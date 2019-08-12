@@ -5,6 +5,12 @@ import users from './mockData.js';
 
 import List from './components/List.jsx';
 
+const styles = {
+  mainDiv: {
+    fontFamily: '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue","Fira Sans",Ubuntu,Oxygen,"Oxygen Sans",Cantarell,"Droid Sans","Apple Color Emoji","Segoe UI Emoji","Segoe UI Emoji","Segoe UI Symbol","Lucida Grande",Helvetica,Arial,sans-serif'
+  }
+}
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -48,7 +54,7 @@ class App extends React.Component {
     const { activeView } = this.state;
 
     return (
-      <div>
+      <div style={styles.mainDiv}>
         <h1>Anchor</h1>
         <button onClick={() => this.changeView('showClimbers')}>See climbers next you</button>
         <button onClick={() => this.changeView('showAnchors')}>Anchored climbers</button>
