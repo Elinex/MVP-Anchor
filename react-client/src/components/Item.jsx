@@ -4,13 +4,23 @@ const styles = {
   mainDiv: {
     width: '192px',
     boxShadow: '0 0 0 1px rgba(0,0,0,.15)'
+  },
+  img: {
+    backgroundColor: '#fff',
+    border: '2px solid #fff',
+    boxShadow: '0 0 3px 0 rgba(0,0,0,.2)',
+    width: '104px',
+    height: '104px',
+    boxSizing: 'border-box',
+    backgroundClip: 'content-box',
+    borderRadius: '50%'
   }
 }
 
 const Item = ({user}) => {
   return (
     <div style={styles.mainDiv}>
-      <img src={user.avatar}></img>
+      <img src={user.avatar} style={styles.img}></img>
       <span>{user.name}</span>
       <span>{user.city}</span>
       <span>Prefered category: {user.preferCategory}</span>

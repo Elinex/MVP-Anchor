@@ -6,7 +6,7 @@ const List = ({users}) => {
   console.log(users)
   return (
     <div>
-      {users.map(user => <Item user={user} />)}
+      {users.map(user => <Item user={user} key={user.id} />)}
     </div>
   )
 }
