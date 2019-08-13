@@ -153,7 +153,7 @@ class App extends React.Component {
             </div>
           )}
         </div>
-        {(activeView !== 'login' && activeView !== 'signup' && activeView !== 'main')
+        {(logged && activeView !== 'signup')
         && (
           <div>
             <button
@@ -168,13 +168,13 @@ class App extends React.Component {
             </button>
           </div>
         )}
-        {activeView === 'main' && (
+        {(activeView === 'main' || !logged) && (
           <Main />
         )}
-        {activeView === 'showClimbers' && (
+        {(activeView === 'showClimbers' && logged) && (
           <List users={this.filterUsers('none')} changeStatus={this.changeStatus}/>
         )}
-        {activeView === 'showAnchors' && (
+        {(activeView === 'showAnchors' && logged) && (
           <List users={this.filterUsers('matched')} changeView={this.changeView} />
         )}
         {activeView === 'userClicked' && (
