@@ -7,11 +7,18 @@ const styles = {
   }
 }
 
-const List = ({users, changeView}) => {
+const List = ({users, changeStatus, changeView}) => {
   console.log(users)
   return (
     <div style={styles.mainDiv}>
-      {users.map(user => <Item user={user} key={user.id} changeView={changeView} />)}
+      {users.map(user => (
+        <Item
+          user={user}
+          key={user.id}
+          changeStatus={changeStatus}
+          changeView={changeView}
+        />
+      ))}
     </div>
   )
 }

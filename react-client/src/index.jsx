@@ -61,6 +61,7 @@ class App extends React.Component {
     }
     this.changeView = this.changeView.bind(this);
     this.filterUsers = this.filterUsers.bind(this);
+    this.changeStatus = this.changeStatus.bind(this);
   }
 
   componentWillMount(){
@@ -82,6 +83,16 @@ class App extends React.Component {
     })
   }
 
+  changeStatus(status, userClicked){
+    userClicked.status = status;
+    const filterUsers = this.state.users.filter(user =>
+      user.id !== userClicked.id
+    );
+    this.setState({
+      users: filterUsers.concat(userClicked)
+    });
+  }
+
   filterUsers(status){
     const users = this.state.users.filter(user => user.status === status);
     return users;
@@ -89,6 +100,7 @@ class App extends React.Component {
 
   render () {
     const { activeView, userClicked, userName } = this.state;
+    console.log(this.state.users)
 
     return (
       <div style={styles.mainDiv}>
@@ -101,7 +113,7 @@ class App extends React.Component {
           <button
             onClick={() => this.changeView('showClimbers')}
             style={styles.button} >
-              See climbers next you
+              Climbers close to you
           </button>
           <button
             onClick={() => this.changeView('showAnchors')}
@@ -110,10 +122,10 @@ class App extends React.Component {
           </button>
         </div>
         {activeView === 'showClimbers' && (
-          <List users={this.filterUsers('none')} />
+          <List users={this.filterUsers('none')} changeStatus={this.changeStatus}/>
         )}
         {activeView === 'showAnchors' && (
-          <List users={this.filterUsers('liked')} changeView={this.changeView} />
+          <List users={this.filterUsers('matched')} changeView={this.changeView} />
         )}
         {activeView === 'userClicked' && (
           <div style={styles.chatDiv}>

@@ -55,7 +55,7 @@ const styles = {
   }
 }
 
-const Item = ({user, changeView}) => {
+const Item = ({user, changeView, changeStatus}) => {
   return (
     <div style={styles.mainDiv}>
       <div>
@@ -67,11 +67,11 @@ const Item = ({user, changeView}) => {
         <span style={styles.location}>{user.city}, {user.state}</span>
       </div>
       <div>
-        <span>Prefered category </span>
+        <span>Favorite category is </span>
         <span style={{color: '#665ed0', fontSize: '1.2em'}}>{user.preferCategory}</span>
       </div>
       <div>
-        <span>Prefer climbing in </span>
+        <span>Prefer to climb </span>
         <span style={{color: '#665ed0', fontSize: '1.2em'}}>{user.preferClimb}</span>
       </div>
       <div>
@@ -83,11 +83,21 @@ const Item = ({user, changeView}) => {
       </div>
       {user.status === 'none' && (
         <div style={styles.iconDiv}>
-          <TiThumbsUp height={25} width={25} color='#665ed0'/>
-          <TiThumbsDown height={25} width={25} color='#665ed0'/>
+          <TiThumbsUp
+            height={25}
+            width={25}
+            color='#665ed0'
+            onClick={() => changeStatus('liked', user)}
+          />
+          <TiThumbsDown
+            height={25}
+            width={25}
+            color='#665ed0'
+            onClick={() => changeStatus('disliked', user)}
+          />
         </div>
       )}
-      {user.status === 'liked' && (
+      {user.status === 'matched' && (
         <div style={styles.iconDiv}>
           <IoChatbubbleWorking
             height={25}
