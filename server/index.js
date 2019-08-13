@@ -18,6 +18,11 @@ app.get('/items', function (req, res) {
   // });
 });
 
+app.post('/api/login', function (req, res) {
+  console.log(req.body)
+  res.send('Logged')
+})
+
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });

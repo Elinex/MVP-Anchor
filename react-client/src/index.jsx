@@ -162,7 +162,7 @@ class App extends React.Component {
           </div>
         )}
         {activeView === 'login' && (
-          <Login />
+          <Login changeView={this.changeView}/>
         )}
         {activeView === 'signup' && (
           <Signup />
