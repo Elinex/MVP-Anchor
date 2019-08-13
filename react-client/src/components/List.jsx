@@ -8,7 +8,6 @@ const styles = {
 }
 
 const List = ({users, changeStatus, changeView}) => {
-  console.log(users)
   return (
     <div style={styles.mainDiv}>
       {users.map(user => (

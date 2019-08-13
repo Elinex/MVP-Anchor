@@ -7,6 +7,8 @@ import faker from 'faker';
 import List from './components/List.jsx';
 import Item from './components/Item.jsx';
 import Chat from './components/Chat.jsx';
+import Login from './components/Login.jsx';
+import Signup from './components/Signup.jsx';
 
 const styles = {
   mainDiv: {
@@ -25,10 +27,10 @@ const styles = {
     fontWeight: '200'
   },
   h4: {
-    flex: 1,
-    textAlign: 'right',
-    color: '#fff',
-    fontWeight: '200',
+    // flex: 1,
+    // textAlign: 'right',
+    // color: '#665ed0',
+    // fontWeight: '200',
   },
   button: {
     backgroundColor: 'inherit',
@@ -46,7 +48,22 @@ const styles = {
     boxShadow: '0 0 0 1px rgba(0,0,0,.15)',
     backgroundColor: '#665ed0',
     margin: '10px 0 10px 0'
-  }
+  },
+  loginDiv: {
+    flex: 1,
+    textAlign: 'right',
+  },
+  buttonLogin: {
+    backgroundColor: 'inherit',
+    fontSize: '1em',
+    border: 'none',
+    color: '#fff',
+    // padding: '15px 32px',
+    // textAlign: 'center',
+    textDecoration: 'none',
+    display: 'inline-block',
+    fontWeight: '200'
+  },
 }
 
 class App extends React.Component {
@@ -105,7 +122,18 @@ class App extends React.Component {
         <div style={styles.header}>
           <IoAndroidHand height={40} width={40} color='#fff' stroke='#665ed0' strokeWidth="1"/>
           <h1 style={styles.h1}>Anchor</h1>
-          <h4 style={styles.h4}>Hello, {userName}</h4>
+          <div style={styles.loginDiv}>
+            <button
+              onClick={() => this.changeView('login')}
+              style={styles.buttonLogin} >
+                Login
+            </button>
+            <button
+              onClick={() => this.changeView('signup')}
+              style={styles.buttonLogin} >
+                Sign up
+            </button>
+          </div>
         </div>
         <div>
           <button
@@ -118,6 +146,7 @@ class App extends React.Component {
             style={styles.button} >
               Matches
           </button>
+          {/* <h4 style={styles.h4}>Hello, {userName}</h4> */}
         </div>
         {activeView === 'showClimbers' && (
           <List users={this.filterUsers('none')} changeStatus={this.changeStatus}/>
@@ -130,6 +159,12 @@ class App extends React.Component {
             <Item user={userClicked} />
             <Chat user={userClicked} userName={userName} />
           </div>
+        )}
+        {activeView === 'login' && (
+          <Login />
+        )}
+        {activeView === 'signup' && (
+          <Signup />
         )}
       </div>
     )
