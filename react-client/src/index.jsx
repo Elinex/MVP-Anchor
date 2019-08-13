@@ -100,7 +100,6 @@ class App extends React.Component {
 
   render () {
     const { activeView, userClicked, userName } = this.state;
-    console.log(this.state.users)
 
     return (
       <div style={styles.mainDiv}>
@@ -130,7 +129,7 @@ class App extends React.Component {
         {activeView === 'userClicked' && (
           <div style={styles.chatDiv}>
             <Item user={userClicked} />
-            <Chat />
+            <Chat user={userClicked} userName={userName} />
           </div>
         )}
       </div>
