@@ -19,18 +19,18 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     padding: '0px 20px 0 20px',
-    backgroundColor: '#665ed0'
+    backgroundColor: '#665ed0',
+    minHeight: '5em'
   },
-  h1: {
+  anchor: {
+    fontSize: '2em',
     color: '#fff',
     marginLeft: '10px',
-    fontWeight: '200'
-  },
-  h4: {
-    // flex: 1,
-    // textAlign: 'right',
-    // color: '#665ed0',
-    // fontWeight: '200',
+    fontWeight: '200',
+    backgroundColor: 'inherit',
+    border: 'none',
+    textDecoration: 'none',
+    display: 'inline-block',
   },
   button: {
     backgroundColor: 'inherit',
@@ -58,8 +58,6 @@ const styles = {
     fontSize: '1em',
     border: 'none',
     color: '#fff',
-    // padding: '15px 32px',
-    // textAlign: 'center',
     textDecoration: 'none',
     display: 'inline-block',
     fontWeight: '200'
@@ -121,7 +119,9 @@ class App extends React.Component {
       <div style={styles.mainDiv}>
         <div style={styles.header}>
           <IoAndroidHand height={40} width={40} color='#fff' stroke='#665ed0' strokeWidth="1"/>
-          <h1 style={styles.h1}>Anchor</h1>
+          <button onClick={() => this.changeView('showClimbers')} style={styles.anchor}>
+            Anchor
+          </button>
           <div style={styles.loginDiv}>
             <button
               onClick={() => this.changeView('login')}
@@ -135,19 +135,20 @@ class App extends React.Component {
             </button>
           </div>
         </div>
-        <div>
-          <button
-            onClick={() => this.changeView('showClimbers')}
-            style={styles.button} >
-              Climbers close to you
-          </button>
-          <button
-            onClick={() => this.changeView('showAnchors')}
-            style={styles.button} >
-              Matches
-          </button>
-          {/* <h4 style={styles.h4}>Hello, {userName}</h4> */}
-        </div>
+        {(activeView !== 'login' && activeView !== 'signup') && (
+          <div>
+            <button
+              onClick={() => this.changeView('showClimbers')}
+              style={styles.button} >
+                Climbers close to you
+            </button>
+            <button
+              onClick={() => this.changeView('showAnchors')}
+              style={styles.button} >
+                Matches
+            </button>
+          </div>
+        )}
         {activeView === 'showClimbers' && (
           <List users={this.filterUsers('none')} changeStatus={this.changeStatus}/>
         )}
