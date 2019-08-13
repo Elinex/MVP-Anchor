@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
 import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
+import IoChatbubbleWorking from 'react-icons/lib/io/chatbubble-working';
 
 
 const styles = {
@@ -15,7 +16,9 @@ const styles = {
     color: 'rgba(0,0,0,.6)',
     textAlign: 'center',
     padding: '20px 0 10px 0',
-    lineHeight: '1.6em'
+    lineHeight: '1.6em',
+    backgroundColor: '#fff',
+    margin: '15px'
   },
   img: {
     backgroundColor: '#fff',
@@ -78,10 +81,17 @@ const Item = ({user}) => {
       <div style={styles.climbSince}>
         <span>Climb since  {moment(user.climbSince, "YYYYMMDD").fromNow()}</span>
       </div>
-      <div style={styles.iconDiv}>
-        <TiThumbsUp height={25} width={25}/>
-        <TiThumbsDown height={25} width={25}/>
-      </div>
+      {user.status === 'none' && (
+        <div style={styles.iconDiv}>
+          <TiThumbsUp height={25} width={25} color='#665ed0'/>
+          <TiThumbsDown height={25} width={25} color='#665ed0'/>
+        </div>
+      )}
+      {user.status === 'liked' && (
+        <div style={styles.iconDiv}>
+          <IoChatbubbleWorking height={25} width={25} color='#665ed0'/>
+        </div>
+      )}
     </div>
   )
 }
