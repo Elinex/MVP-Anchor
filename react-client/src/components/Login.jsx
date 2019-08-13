@@ -4,7 +4,7 @@ import $ from 'jquery';
 const styles = {
   form: {
     margin: '20px',
-    display: 'flex',
+    display: 'inline-flex',
     flexDirection: 'column',
   }
 }
