@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import users from './mockData.js';
 import IoAndroidHand from 'react-icons/lib/io/android-hand';
 import faker from 'faker';
 
+import users from './mockData.js';
 import List from './components/List.jsx';
 import Item from './components/Item.jsx';
 import Chat from './components/Chat.jsx';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
+import Main from './components/Main.jsx';
 
 const styles = {
   mainDiv: {
@@ -62,26 +63,29 @@ const styles = {
     display: 'inline-block',
     fontWeight: '200'
   },
+  hello: {
+    flex: 1,
+    textAlign: 'right',
+    fontSize: '1em',
+    color: '#fff',
+    fontWeight: '200'
+  }
 }
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: 'showClimbers',
+      activeView: 'main',
       users: [],
       userClicked: null,
-      userName: ''
+      userName: '',
+      logged: false
     }
     this.changeView = this.changeView.bind(this);
     this.filterUsers = this.filterUsers.bind(this);
     this.changeStatus = this.changeStatus.bind(this);
-  }
-
-  componentWillMount(){
-    this.setState({
-      userName: `${faker.name.firstName()} ${faker.name.lastName()}`
-    })
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   componentDidMount() {
@@ -94,6 +98,13 @@ class App extends React.Component {
     this.setState({
       activeView: view,
       userClicked
+    })
+  }
+
+  handleLogin(){
+    this.setState({
+      logged: true,
+      userName: `${faker.name.firstName()} ${faker.name.lastName()}`
     })
   }
 
@@ -113,7 +124,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { activeView, userClicked, userName } = this.state;
+    const { activeView, userClicked, userName, logged } = this.state;
 
     return (
       <div style={styles.mainDiv}>
@@ -122,20 +133,28 @@ class App extends React.Component {
           <button onClick={() => this.changeView('showClimbers')} style={styles.anchor}>
             Anchor
           </button>
-          <div style={styles.loginDiv}>
-            <button
-              onClick={() => this.changeView('login')}
-              style={styles.buttonLogin} >
-                Login
-            </button>
-            <button
-              onClick={() => this.changeView('signup')}
-              style={styles.buttonLogin} >
-                Sign up
-            </button>
-          </div>
+          {logged && (
+            <div style={styles.hello}>
+              Hello, {userName}
+            </div>
+          )}
+          {!logged && (
+            <div style={styles.loginDiv}>
+              <button
+                onClick={() => this.changeView('login')}
+                style={styles.buttonLogin} >
+                  Login
+              </button>
+              <button
+                onClick={() => this.changeView('signup')}
+                style={styles.buttonLogin} >
+                  Sign up
+              </button>
+            </div>
+          )}
         </div>
-        {(activeView !== 'login' && activeView !== 'signup') && (
+        {(activeView !== 'login' && activeView !== 'signup' && activeView !== 'main')
+        && (
           <div>
             <button
               onClick={() => this.changeView('showClimbers')}
@@ -148,6 +167,9 @@ class App extends React.Component {
                 Matches
             </button>
           </div>
+        )}
+        {activeView === 'main' && (
+          <Main />
         )}
         {activeView === 'showClimbers' && (
           <List users={this.filterUsers('none')} changeStatus={this.changeStatus}/>
@@ -162,7 +184,10 @@ class App extends React.Component {
           </div>
         )}
         {activeView === 'login' && (
-          <Login changeView={this.changeView}/>
+          <Login
+            changeView={this.changeView}
+            handleLogin={this.handleLogin}
+          />
         )}
         {activeView === 'signup' && (
           <Signup />

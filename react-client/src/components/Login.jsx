@@ -6,7 +6,6 @@ const styles = {
     margin: '20px',
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'center'
   }
 }
 
@@ -30,14 +29,17 @@ class Login extends React.Component {
   submitText(e){
     e.preventDefault();
     const changeView = this.props.changeView;
+    const handleLogin = this.props.handleLogin;
     const data = this.state;
+
     $.ajax({
       type: 'POST',
       url: 'http://localhost:3000/api/login',
       data
     })
     .done(function() {
-      changeView('showClimbers')
+      changeView('showClimbers');
+      handleLogin();
     });
   }
 

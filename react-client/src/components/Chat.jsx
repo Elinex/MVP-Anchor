@@ -27,50 +27,37 @@ class Chat extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      textInput: '',
+      text: '',
       messages: [],
-      userActive: ''
     };
     this.changeText = this.changeText.bind(this);
     this.submitText = this.submitText.bind(this);
   }
 
-  componentDidMount(){
-    console.log(this.props.userName)
-    this.setState({
-      userActive: this.props.userName
-    })
-  }
-
   changeText(text){
     this.setState({
-      textInput: text
+      text
     })
   }
 
   submitText(e){
     e.preventDefault();
-    const text = this.state.textInput;
-    console.log(this.state.userActive)
+    const { text } = this.state;
+
     this.setState(state => {
       return {
         messages: state.messages.concat({
-          username: state.userActive,
+          username: this.props.userName,
           createdAt: Date.now(),
           text
         }),
-        textInput: '',
-        userActive:
-          (state.userActive === this.props.userName )
-          ? this.props.user.name
-          : this.props.userName
+        text: ''
       }
     })
   }
 
   render(){
     const { messages } = this.state;
-    console.log(this.state.textInput)
 
     return (
       <div style={styles.mainDiv}>
@@ -87,7 +74,7 @@ class Chat extends React.Component {
             <input
               type='text'
               placeholder='...'
-              value={this.state.value}
+              value={this.state.text}
               onChange={(e) => this.changeText(e.target.value)}
               style={styles.input}
             />

@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from './Item.jsx';
+import faker from 'faker';
 
 const styles = {
   mainDiv: {
