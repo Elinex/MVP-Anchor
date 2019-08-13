@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import users from './mockData.js';
 import IoAndroidHand from 'react-icons/lib/io/android-hand';
+import faker from 'faker';
 
 import List from './components/List.jsx';
 import Item from './components/Item.jsx';
@@ -16,13 +17,19 @@ const styles = {
   header: {
     display: 'flex',
     alignItems: 'center',
-    padding: '10px',
+    padding: '0px 20px 0 20px',
     backgroundColor: '#665ed0'
   },
   h1: {
     color: '#fff',
     marginLeft: '10px',
     fontWeight: '200'
+  },
+  h4: {
+    flex: 1,
+    textAlign: 'right',
+    color: '#fff',
+    fontWeight: '200',
   },
   button: {
     backgroundColor: 'inherit',
@@ -49,10 +56,17 @@ class App extends React.Component {
     this.state = {
       activeView: 'main',
       users: [],
-      userClicked: null
+      userClicked: null,
+      userName: ''
     }
     this.changeView = this.changeView.bind(this);
     this.filterUsers = this.filterUsers.bind(this);
+  }
+
+  componentWillMount(){
+    this.setState({
+      userName: `${faker.name.firstName()} ${faker.name.lastName()}`
+    })
   }
 
   componentDidMount() {
@@ -74,13 +88,14 @@ class App extends React.Component {
   }
 
   render () {
-    const { activeView, userClicked } = this.state;
+    const { activeView, userClicked, userName } = this.state;
 
     return (
       <div style={styles.mainDiv}>
         <div style={styles.header}>
           <IoAndroidHand height={40} width={40} color='#fff' stroke='#665ed0' strokeWidth="1"/>
           <h1 style={styles.h1}>Anchor</h1>
+          <h4 style={styles.h4}>Hello, {userName}</h4>
         </div>
         <div>
           <button

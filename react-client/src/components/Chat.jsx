@@ -17,6 +17,7 @@ const styles = {
   },
   input: {
     width: '-webkit-fill-available',
+    minHeight: '1.5rem',
     margin: '0 10px 0 10px'
   }
 }
