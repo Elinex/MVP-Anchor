@@ -5,6 +5,8 @@ import users from './mockData.js';
 import IoAndroidHand from 'react-icons/lib/io/android-hand';
 
 import List from './components/List.jsx';
+import Item from './components/Item.jsx';
+import Chat from './components/Chat.jsx';
 
 const styles = {
   mainDiv: {
@@ -31,6 +33,13 @@ const styles = {
     textAlign: 'center',
     textDecoration: 'none',
     display: 'inline-block'
+  },
+  chatDiv: {
+    display: 'flex',
+    height: '400px',
+    boxShadow: '0 0 0 1px rgba(0,0,0,.15)',
+    backgroundColor: '#665ed0',
+    margin: '10px 0 10px 0'
   }
 }
 
@@ -39,32 +48,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       activeView: 'main',
-      users: []
+      users: [],
+      userClicked: null
     }
     this.changeView = this.changeView.bind(this);
     this.filterUsers = this.filterUsers.bind(this);
   }
 
   componentDidMount() {
-    // $.ajax({
-    //   url: '/items',
-    //   success: (data) => {
-    //     this.setState({
-    //       items: data
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });
     this.setState({
       users: users
     })
   }
 
-  changeView(view){
+  changeView(view, userClicked){
     this.setState({
-      activeView: view
+      activeView: view,
+      userClicked
     })
   }
 
@@ -74,7 +74,7 @@ class App extends React.Component {
   }
 
   render () {
-    const { activeView } = this.state;
+    const { activeView, userClicked } = this.state;
 
     return (
       <div style={styles.mainDiv}>
@@ -94,8 +94,18 @@ class App extends React.Component {
               Anchored climbers
           </button>
         </div>
-        {activeView === 'showClimbers' && <List users={this.filterUsers('none')} />}
-        {activeView === 'showAnchors' && <List users={this.filterUsers('liked')} />}
+        {activeView === 'showClimbers' && (
+          <List users={this.filterUsers('none')} />
+        )}
+        {activeView === 'showAnchors' && (
+          <List users={this.filterUsers('liked')} changeView={this.changeView} />
+        )}
+        {activeView === 'userClicked' && (
+          <div style={styles.chatDiv}>
+            <Item user={userClicked} />
+            <Chat />
+          </div>
+        )}
       </div>
     )
   }

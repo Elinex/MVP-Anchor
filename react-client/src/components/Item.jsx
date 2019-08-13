@@ -55,7 +55,7 @@ const styles = {
   }
 }
 
-const Item = ({user}) => {
+const Item = ({user, changeView}) => {
   return (
     <div style={styles.mainDiv}>
       <div>
@@ -89,7 +89,12 @@ const Item = ({user}) => {
       )}
       {user.status === 'liked' && (
         <div style={styles.iconDiv}>
-          <IoChatbubbleWorking height={25} width={25} color='#665ed0'/>
+          <IoChatbubbleWorking
+            height={25}
+            width={25}
+            color='#665ed0'
+            onClick={() => changeView('userClicked', user)}
+          />
         </div>
       )}
     </div>
