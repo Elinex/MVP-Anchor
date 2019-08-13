@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import $ from 'jquery';
 import users from './mockData.js';
 import IoAndroidHand from 'react-icons/lib/io/android-hand';
 import faker from 'faker';
@@ -54,7 +53,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeView: 'main',
+      activeView: 'showClimbers',
       users: [],
       userClicked: null,
       userName: ''
@@ -117,7 +116,7 @@ class App extends React.Component {
           <button
             onClick={() => this.changeView('showAnchors')}
             style={styles.button} >
-              Anchored climbers
+              Matches
           </button>
         </div>
         {activeView === 'showClimbers' && (
